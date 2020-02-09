@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block blokTitle %}
+	{{page_title}}
+{% endblock blokTitle %}
+
+{% block blokIsi %}
+	<h1>{{page_title}}</h1>
+	<form method="POST">
+		{% csrf_token %}
+		<table>
+			{{akun_form.as_table}}
+		</table>
+		<button class="btn btn-primary" type="Submit">Simpan</button>
+	</form>
+{% endblock blokIsi %}
