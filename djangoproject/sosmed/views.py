@@ -25,7 +25,7 @@ class SosmedListView(SosmedSubList, TemplateView):
 		list_akun = self.get_list_data(self.request.GET)
 		list_content = Instagram.objects.values_list('content', flat=True).distinct()
 		konteks = {
-			'page_title':'Sosial media menggunakan class based view',
+			'page_title':'Sosial media menggunakan class-based view',
 			'semua_akun':list_akun,
 			'list_content':list_content,
 		}
