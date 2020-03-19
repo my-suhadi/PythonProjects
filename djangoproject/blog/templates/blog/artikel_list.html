@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page_title }}</title>
+</head>
+<body>
+    <h1>{{ page_title }}</h1>
+    <ol>
+        {% for artikel in object_list %}
+            <li>{{ artikel.judul }} - oleh: {{ artikel.penulis }}</li>
+        {% endfor %}
+    </ol>
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a href="{% url 'blog:list' penulis page_obj.previous_page_number %}">&laquo;</a>
+        {% else %}
+            <span>&laquo;</span>
+        {% endif %}
+
+        {% for i in paginator.page_range %}
+            <a href="{% url 'blog:list' penulis i %}">{{ i }}</a>
+        {% endfor %}
+
+
+        {% if page_obj.has_next %}
+            <a href="{% url 'blog:list' penulis page_obj.next_page_number %}">&raquo;</a>
+        {% else %}
+            <span>&raquo;</span>
+        {% endif %}
+    {% else %}
+        gk ada halaman
+    {% endif %}
+</body>
+</html>
