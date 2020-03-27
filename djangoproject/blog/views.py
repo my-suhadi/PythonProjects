@@ -6,7 +6,7 @@ from .models import Artikel
 class ArtikelListView(ListView):
     model = Artikel
     ordering = ['penulis']
-    paginate_by = 2
+    #paginate_by = 2
     extra_context = {
         'page_title': 'Blog Dengan ListView',
     }

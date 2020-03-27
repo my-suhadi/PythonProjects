@@ -8,7 +8,7 @@
     <h1>{{ page_title }}</h1>
     <ol>
         {% for artikel in object_list %}
-            <li>{{ artikel.judul }} - oleh: {{ artikel.penulis }}</li>
+            <li><a href="{% url 'blog:detail' artikel.slug %}">{{ artikel.judul }}</a> - oleh: {{ artikel.penulis }}</li>
         {% endfor %}
     </ol>
     {% if is_paginated %}

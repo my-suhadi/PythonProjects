@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Artikel</title>
+</head>
+<body>
+    <h1>Detail Artikel</h1>
+    <h2>{{ object.judul }}</h2>
+    <span>Oleh: {{ object.penulis }}, Ditulis: {{ object.publish }}</span>
+    <p>{{ object.isi }}</p><br/>
+    <a href="{% url 'blog:list' 'all' %}">Kembali</a>
+</body>
+</html>
