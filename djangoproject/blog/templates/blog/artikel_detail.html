@@ -2,13 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Detail Artikel</title>
+    <title>{{ page_title }}</title>
 </head>
 <body>
-    <h1>Detail Artikel</h1>
+    <h1>{{page_title}}</h1>
     <h2>{{ object.judul }}</h2>
     <span>Oleh: {{ object.penulis }}, Ditulis: {{ object.publish }}</span>
     <p>{{ object.isi }}</p><br/>
     <a href="{% url 'blog:list' 'all' %}">Kembali</a>
+    <br>
+    <h3>Artikel Lainya</h3>
+    <ol>
+        {% for artikel in artikel_lain %}
+            <li><a href="{% url 'blog:detail' artikel.slug %}">{{ artikel.judul }}</a></li>
+        {% endfor %}
+
+    </ol>
 </body>
 </html>
