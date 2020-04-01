@@ -1,6 +1,29 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, FormView
+
 from .models import Artikel
+from .forms import ArtikelForm
+
+
+class ArtikelFormView(FormView):
+    form_class = ArtikelForm
+    template_name = 'blog/create.html'
+    success_url = reverse_lazy('blog:list', kwargs={'penulis': 'all'})
+    konteks_tambahan = {
+        'judul_halaman': 'Tambah Artikel',
+    }
+
+    def get_context_data(self, **kwargs):
+        self.kwargs.update(self.konteks_tambahan)
+        kwargs = self.kwargs
+
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        form.save()
+        
+        return super().form_valid(form)
 
 
 class ArtikelDetailView(DetailView):
