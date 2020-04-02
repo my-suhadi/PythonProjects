@@ -1,9 +1,43 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, FormView
+from django.views.generic import ListView, DetailView, FormView, CreateView
 
 from .models import Artikel
 from .forms import ArtikelForm
+
+
+class ArtikelCreateView2(CreateView):
+    model = Artikel
+    fields = [
+        'judul',
+        'isi',
+        'penulis',
+    ]
+
+    konteks_tambahan = {
+        'judul_halaman': 'Tambah artikel model form',
+    }
+
+    def get_context_data(self, **kwargs):
+        self.kwargs.update(self.konteks_tambahan)
+
+        kwargs = self.kwargs
+        return super().get_context_data(**kwargs)
+
+
+class ArtikelCreateView1(CreateView):
+    form_class = ArtikelForm
+    template_name = 'blog/create.html'
+
+    konteks_tambahan = {
+        'judul_halaman': 'Tambah artikel menggunakan create view',
+    }
+
+    def get_context_data(self, **kwargs):
+        self.kwargs.update(self.konteks_tambahan)
+
+        kwargs = self.kwargs
+        return super().get_context_data(**kwargs)
 
 
 class ArtikelFormView(FormView):
@@ -22,7 +56,7 @@ class ArtikelFormView(FormView):
 
     def form_valid(self, form):
         form.save()
-        
+
         return super().form_valid(form)
 
 
