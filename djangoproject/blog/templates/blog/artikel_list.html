@@ -10,7 +10,8 @@
     <a href="{% url 'blog:create2' %}">Tambah2</a>
     <ol>
         {% for artikel in object_list %}
-            <li><a href="{% url 'blog:detail' artikel.slug %}">{{ artikel.judul }}</a> - oleh: {{ artikel.penulis }}</li>
+            <li><a href="{% url 'blog:detail' artikel.slug %}">{{ artikel.judul }}</a> - oleh: {{ artikel.penulis }} <a href="{% url 'blog:delete' artikel.pk %}">Hapus</a>
+            </li>
         {% endfor %}
     </ol>
     {% if is_paginated %}

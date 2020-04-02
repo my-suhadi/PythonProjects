@@ -9,14 +9,15 @@
     <h2>{{ object.judul }}</h2>
     <span>Oleh: {{ object.penulis }}, Ditulis: {{ object.publish }}</span>
     <p>{{ object.isi }}</p><br/>
-    <a href="{% url 'blog:list' 'all' %}">Kembali</a>
+    <a href="{% url 'blog:list' 'all' %}">Kembali</a> |
+    <a href="{% url 'blog:update1' object.pk %}">Update1</a> |
+    <a href="{% url 'blog:update2' object.pk %}">Update2</a>
     <br>
     <h3>Artikel Lainya</h3>
     <ol>
         {% for artikel in artikel_lain %}
             <li><a href="{% url 'blog:detail' artikel.slug %}">{{ artikel.judul }}</a></li>
         {% endfor %}
-
     </ol>
 </body>
 </html>

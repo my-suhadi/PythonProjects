@@ -1,9 +1,28 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, FormView, CreateView
+from django.views.generic import ListView, DetailView, FormView, CreateView, UpdateView, DeleteView
 
 from .models import Artikel
 from .forms import ArtikelForm
+
+
+class ArtikelDeleteView(DeleteView):
+    model = Artikel
+    # template_name = 'blog/konfirmasi_hapus.html'
+    success_url = reverse_lazy('blog:list', kwargs = {'penulis': 'all'})
+
+
+class ArtikelUpdateView2(UpdateView):
+    model = Artikel
+    fields = [
+        'penulis',
+    ]
+
+
+class ArtikelUpdateView1(UpdateView):
+    form_class = ArtikelForm
+    model = Artikel
+    template_name = 'blog/create.html'
 
 
 class ArtikelCreateView2(CreateView):
