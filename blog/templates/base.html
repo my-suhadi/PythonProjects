@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block halaman_judul %}
+        {% endblock halaman_judul %}
+    </title>
+    {% include 'snipppet/styles.html' %}
+</head>
+<body>
+    {% include 'snipppet/navbar.html' %}
+
+    <div class="container" style="margin-top: 100px">
+        {% block konten %}
+        {% endblock konten %}
+    </div>
+
+    {% include 'snipppet/scripts.html' %}
+</body>
+</html>
