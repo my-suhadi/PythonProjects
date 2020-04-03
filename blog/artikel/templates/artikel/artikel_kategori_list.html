@@ -8,6 +8,7 @@
 {% block konten %}
     <div class="row">
         <div class="col-md-8">
+            <h2 class="border-bottom">Kategori: {{ kategori }}</h2>
             {% if is_paginated %}
                 <nav aria-label="halaman_kategori">
                     <ul class="pagination">
@@ -45,14 +46,14 @@
             {% endif %}
             {% for artikel in artikel_kategori %}
                 <h3><a class="text-dark" href="{% url 'artikel:detail' artikel.slug %}">{{ artikel.judul }}</a></h3>
-                <p>Kategori: {{ artikel.kategori }} | {{ artikel.published }}</p>
+                <p>{{ artikel.published }}</p>
                 <p class="border-bottom">{{ artikel.isi|truncatewords:50 }} <a
                         href="{% url 'artikel:detail' artikel.slug %}">Selengkapnya</a>
                 </p>
             {% endfor %}
         </div>
         <div class="col-sm">
-            <h3>Kategori</h3>
+            <h3>Kategori Lainnya</h3>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><a href="{% url 'artikel:list' 1 %}">semua kategori</a></li>
                 {% for kategori in kategori_list %}

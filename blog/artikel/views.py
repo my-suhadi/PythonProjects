@@ -6,6 +6,19 @@ from django.views.generic import ListView, DetailView
 from artikel.models import Artikel
 
 
+class ArtikelPerKategori():
+    model = Artikel
+
+    def get_artikel_terakhir_tiap_kategori(self):
+        daftar_kategori = self.model.objects.values_list('kategori', flat=True).distinct()
+        queryset = []
+        for kategori in daftar_kategori:
+            artikel = self.model.objects.filter(kategori=kategori).latest('published')
+            queryset.append(artikel)
+
+        return queryset
+
+
 class ArtikelKategoriListView(ListView):
     model = Artikel
     template_name = 'artikel/artikel_kategori_list.html'
@@ -19,7 +32,8 @@ class ArtikelKategoriListView(ListView):
 
     def get_context_data(self, **kwargs):
         # perintah distinct() dgunakan agar gk muncul dobel2
-        kategori_list = self.model.objects.values_list('kategori', flat=True).distinct().exclude(kategori=self.kwargs['kategori'])
+        kategori_list = self.model.objects.values_list('kategori', flat=True).distinct().exclude(
+            kategori=self.kwargs['kategori'])
         self.kwargs.update({'kategori_list': kategori_list})
         kwargs = self.kwargs
         return super().get_context_data(**kwargs)
