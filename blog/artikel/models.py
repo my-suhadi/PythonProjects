@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+from django.urls import reverse
 from django.utils.text import slugify
 
 
@@ -15,6 +16,10 @@ class Artikel(models.Model):
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         self.slug = slugify(self.judul)
         super().save(force_insert, force_update, using, update_fields)
+
+    def get_absolute_url(self):
+        url_slug = {'slug': self.slug}
+        return reverse('artikel:detail', kwargs=url_slug)
 
     def __str__(self):
         return "{}. {}".format(self.id, self.judul)

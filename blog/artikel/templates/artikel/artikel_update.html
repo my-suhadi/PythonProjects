@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block halaman_judul %}
+    Ubah Artikel
+{% endblock %}
+
+{% block konten %}
+    <h1>Ubah artikel</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.judul.id_for_label }}">{{ form.judul.label }}</label>:
+            <input type="text" class="form-control" name="{{ form.judul.name }}" maxlength="{{ form.judul.max }}"
+                   required id="{{ form.judul.id_for_label }}" value="{{ form.judul.value }}">
+
+            <label for="{{ form.isi.id_for_label }}">{{ form.isi.label }}</label>:
+            <textarea type="text" class="form-control" name="{{ form.isi.name }}" rows="10" required
+                      id="{{ form.isi.id_for_label }}">{{ form.isi.value }}</textarea>
+
+            <label for="{{ form.kategori.id_for_label }}">{{ form.kategori.label }}</label>:
+            <input type="text" class="form-control" name="{{ form.kategori.name }}" maxlength="{{ form.kategori.max }}"
+                   required id="{{ form.kategori.id_for_label }}" value="{{ form.kategori.value }}">
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{% url 'artikel:manage' %}" class="btn btn-warning">Batal</a>
+    </form>
+{% endblock %}

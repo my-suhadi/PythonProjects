@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block halaman_judul %}
+    Manage Artikel
+{% endblock %}
+
+{% block konten %}
+    <h1>Manage Artikel</h1>
+    <a href="{% url 'artikel:tambah' %}" class="btn btn-outline-primary btn-block">Tambah Artikel</a>
+    <table class="table mt-3">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Judul</th>
+            <th scope="col">Kategori</th>
+            <th scope="col">Published</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for artikel in artikel_to_manage %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ artikel.judul }}</td>
+                <td>{{ artikel.kategori }}</td>
+                <td>{{ artikel.published }}</td>
+                <td>
+                    <a href="{% url 'artikel:ubah' artikel.id %}" class="btn btn-outline-success">Ubah</a>
+                    <a href="{% url 'artikel:hapus' artikel.id %}" class="btn btn-outline-danger">Hapus</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

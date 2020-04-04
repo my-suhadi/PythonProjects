@@ -1,9 +1,34 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
 from artikel.models import Artikel
+from artikel.templates.forms import ArtikelForm
+
+
+class ArtikelUpdateView(UpdateView):
+    form_class = ArtikelForm
+    model = Artikel
+    template_name = 'artikel/artikel_update.html'
+
+
+class ArtikelDeleteView(DeleteView):
+    model = Artikel
+    template_name = 'artikel/artikel_konfirmasi_delete.html'
+    success_url = reverse_lazy('artikel:manage')
+
+
+class ArtikelManageView(ListView):
+    model = Artikel
+    template_name = 'artikel/artikel_manage.html'
+    context_object_name = 'artikel_to_manage'
+
+
+class ArtikelCreateView(CreateView):
+    form_class = ArtikelForm
+    template_name = 'artikel/artikel_create.html'
 
 
 class ArtikelPerKategori():

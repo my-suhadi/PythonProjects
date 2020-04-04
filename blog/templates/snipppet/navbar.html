@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="#">Blog</a>
+        <a class="navbar-brand" href="{% url 'home' %}">Blog</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -16,13 +16,13 @@
             </ul>
         </div>
         <div class="nav-item dropdown ml-auto">
-            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink" role="button"
+            <a class="nav-link dropdown-toggle text-white-50" href="#" id="navbarDropdownMenuLink" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 User
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Tambah Artikel</a>
-                <a class="dropdown-item" href="#">Manage Artikel</a>
+                <a class="dropdown-item" href="{% url 'artikel:tambah' %}">Tambah Artikel</a>
+                <a class="dropdown-item" href="{% url 'artikel:manage' %}">Manage Artikel</a>
             </div>
         </div>
     </div>
