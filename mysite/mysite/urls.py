@@ -1,4 +1,4 @@
-""" source: https://www.youtube.com/playlist?list=PLgCYzUzKIBE_dil025VAJnDjNZHHHR9mW
+"""source: https://www.youtube.com/playlist?list=PLgCYzUzKIBE_dil025VAJnDjNZHHHR9mW
 
 mysite URL Configuration
 
