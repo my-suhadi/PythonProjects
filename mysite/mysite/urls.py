@@ -1,5 +1,4 @@
 """source: https://www.youtube.com/playlist?list=PLgCYzUzKIBE_dil025VAJnDjNZHHHR9mW
-next video: 8
 mysite URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
