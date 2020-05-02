@@ -45,7 +45,7 @@ class Akun(AbstractBaseUser):
     akun = MyAkunManager()
 
     def __str__(self):
-        return '{}. {}'.format(self.id, self.email)
+        return self.email
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
