@@ -8,7 +8,7 @@ PRIORITY = [
 ]
 
 
-class Questions(models.Model):
+class Pertanyaan(models.Model):
     title = models.CharField(max_length=60)
     question = models.TextField(max_length=400)
     priority = models.CharField(max_length=1, choices=PRIORITY)

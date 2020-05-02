@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # myApps
     'personal',
+    'akun',
 
     # Django apps
     'django.contrib.admin',
@@ -69,6 +70,8 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTH_USER_MODEL = 'akun.Akun'
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
