@@ -1,0 +1,16 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>{{ judul_halaman }}</title>
+</head>
+<body>
+    <h1>{{ judul_halaman }}</h1>
+    <ul>
+        <li><a href="{% url 'index' %}">Beranda</a></li>
+        <li><a href="{% url 'artikel:tambah' %}">Tambah 1</a></li>
+        <li><a href="{% url 'artikel:tambah2' %}">Tambah 2</a></li>
+    </ul>
+    <h3>Selamat datang {{ user }}</h3>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ judul_halaman }}</title>
+</head>
+<body>
+    <h1>Hai {{ user }}, selamat datang di {{ judul_halaman }}</h1>
+    <ul>
+        <li><a href="{% url 'artikel:index' %}">Artikel</a></li>
+        <li><a href="{% url 'keluar' %}">Logout</a></li>
+    </ul>
+</body>
+</html>
