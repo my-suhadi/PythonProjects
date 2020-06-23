@@ -1,12 +1,12 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import profile
+from .models import Profile
 
 
 class ProfileAdmin(admin.ModelAdmin):
     class Meta:
-        model = profile
+        model = Profile
 
 
-admin.site.register(profile, ProfileAdmin)
+admin.site.register(Profile, ProfileAdmin)
