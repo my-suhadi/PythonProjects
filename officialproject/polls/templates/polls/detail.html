@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Judul Detail</title>
+</head>
+<body>
+    {{ question_key }}
+    <ul>
+        {% for choice in question_key.choice_set.all %}
+            <li>{{ choice.choice_text }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
