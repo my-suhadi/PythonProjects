@@ -5,9 +5,9 @@
     <title>Polls Title</title>
 </head>
 <body>
-{% if latest_question_list_key %}
+{% if latest_question_list %}
     <ul>
-        {% for question in latest_question_list_key %}
+        {% for question in latest_question_list %}
             <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
         {% endfor %}
     </ul>

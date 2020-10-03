@@ -5,11 +5,18 @@
     <title>Judul Detail</title>
 </head>
 <body>
-    {{ question_key }}
-    <ul>
-        {% for choice in question_key.choice_set.all %}
-            <li>{{ choice.choice_text }}</li>
+    <h1>{{ question.question_text }}</h1>
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% endif %}
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+        {% csrf_token %}
+        {% for c in question.choice_set.all %}
+            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ c.id }}">
+            <label for="choice{{ forloop.counter }}">{{ c.choice_text }}</label>
+            <br>
         {% endfor %}
-    </ul>
+        <input type="submit" value="Vote">
+    </form>
 </body>
 </html>
