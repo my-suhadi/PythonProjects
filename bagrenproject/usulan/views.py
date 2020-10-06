@@ -1,11 +1,7 @@
-from django.shortcuts import render
+from django.http import HttpResponse
+
 
 # Create your views here.
 
 def index(request):
-	konteks = {
-		'judul':'Usulan',
-		'isi':'untuk memasukkan usulan',
-	}
-
-	return render(request, 'usulan/index.html', konteks)
+    return HttpResponse('Usulan')

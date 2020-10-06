@@ -1,9 +1,10 @@
-from django.conf.urls import url
+from django.urls import path
 
-from . import views
+from sbu import views
 
+app_name = 'sbu'
 urlpatterns = [
-	url(r'^hapus/(?P<delete_id>[0-9]+)', views.hapus_sbu, name='hapus'),
-	url(r'^tambah/', views.tambah_sbu, name='tambah'),
-	url(r'^$', views.index, name='index'),
+    path('', views.index, name='index'),
+    path('hapus/<str:delete_id>', views.hapus_sbu, name='hapus'),
+    path('tambah/', views.tambah_sbu, name='tambah'),
 ]

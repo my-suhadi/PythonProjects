@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
 {% block blokTitle %}
-	{{judul}}
+    {{ judul }}
 {% endblock blokTitle %}
 
 {% block blokIsi %}
-	<form method="POST">
-		{% csrf_token %}
-		<table class="container">
-			{{sbu_form_.as_table}}
-		</table>
-		<button class="btn btn-primary" type="Submit">Simpan</button>
-		<a class="btn btn-secondary" href="{% url "sbu:index" %}">Batal</a>
-	</form>
+    <form method="POST">
+        {% csrf_token %}
+        <table class="container">
+            {{ sbu_form_.as_table }}
+        </table>
+        <button class="btn btn-primary" type="Submit">Simpan</button>
+        <a class="btn btn-secondary" href="{% url "sbu:index" %}">Batal</a>
+    </form>
 {% endblock blokIsi %}
