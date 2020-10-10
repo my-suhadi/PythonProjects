@@ -9,7 +9,6 @@
                 <hr>
                 <a class="btn btn-outline-info  btn-sm btn-block" href="">Update Customer</a>
                 <a class="btn btn-outline-danger  btn-sm btn-block" href="">Delete Customer</a>
-
             </div>
         </div>
 
@@ -17,8 +16,8 @@
             <div class="card card-body">
                 <h5>Contact Information</h5>
                 <hr>
-                <p>Email: </p>
-                <p>Phone: </p>
+                <p>Email: {{ key_customer.email }}</p>
+                <p>Phone: {{ key_customer.phone }}</p>
             </div>
         </div>
 
@@ -26,7 +25,7 @@
             <div class="card card-body">
                 <h5>Total Orders</h5>
                 <hr>
-                <h1 style="text-align: center;padding: 10px"></h1>
+                <h1 style="text-align: center;padding: 10px">{{ key_customer_order.count }}</h1>
             </div>
         </div>
     </div>
@@ -36,7 +35,6 @@
         <div class="col">
             <div class="card card-body">
                 <form method="get">
-
                     <button class="btn btn-primary" type="submit">Search</button>
                 </form>
             </div>
@@ -51,11 +49,23 @@
                     <tr>
                         <th>Product</th>
                         <th>Category</th>
-                        <th>Date Orderd</th>
+                        <th>Date Order</th>
                         <th>Status</th>
                         <th>Update</th>
                         <th>Remove</th>
                     </tr>
+                    {% for customer_order in key_customer_order %}
+                        <tr>
+                            <td>{{ customer_order.product.name }}</td>
+                            <td>{{ customer_order.product.category }}</td>
+                            <td>{{ customer_order.date_created }}</td>
+                            <td>{{ customer_order.status }}</td>
+                            <td><a href="{% url 'url_update_order' customer_order.id %}" class="btn btn-sm btn-info">Update</a>
+                            </td>
+                            <td><a href="{% url 'url_delete_order' customer_order.id %}" class="btn btn-sm btn-danger">Remove</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
 
                 </table>
             </div>
