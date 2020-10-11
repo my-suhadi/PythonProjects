@@ -1,8 +1,37 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.forms import inlineformset_factory
 
 # Create your views here.
 from .models import Product, Order, Customer
-from .form import OrderForm
+from .form import OrderForm, CreateUserForm
+from .filters import OrderFilter
+
+
+def register_view(request):
+    reg_form = CreateUserForm()
+
+    if request.method == 'POST':
+        reg_form = CreateUserForm(request.POST)
+        if reg_form.is_valid():
+            reg_form.save()
+            messages.success(request, 'Account was created for ' + reg_form.cleaned_data.get('username'))
+            return redirect('url_login')
+        else:
+            messages.error(request, reg_form.errors)
+            return redirect('url_register')
+
+    cx = {
+        'key_reg_form': reg_form
+    }
+    return render(request, 'accounts/register.html', cx)
+
+
+def login_view(request):
+    cx = {
+
+    }
+    return render(request, 'accounts/login.html', cx)
 
 
 def home(request):
@@ -33,28 +62,39 @@ def products(request):
 
 
 def customer(request, customer_id):
-    cust = Customer.objects.get(id=customer_id)
-    customer_order = cust.order_set.all()
+    customer_by_id = Customer.objects.get(id=customer_id)
+    customer_order = customer_by_id.order_set.all()
+    customer_order_count = customer_order.count()
+
+    field_filter = OrderFilter(request.GET, queryset=customer_order)
+    customer_order = field_filter.qs
 
     cx = {
-        'key_customer': cust,
-        'key_customer_order': customer_order
+        'key_customer': customer_by_id,
+        'key_customer_order': customer_order,
+        'key_customer_order_count': customer_order_count,
+        'key_field_filter': field_filter
     }
 
     return render(request, 'accounts/customer.html', cx)
 
 
-def create_order(request):
-    order_form = OrderForm()
+def create_order(request, customer_id):
+    current_customer = Customer.objects.get(id=customer_id)
+    order_form_set = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=10)
+
+    # order_form = OrderForm(initial={'customer': current_customer})
+    formset = order_form_set(queryset=Order.objects.none(), instance=current_customer)
 
     if request.method == 'POST':
-        order_form = OrderForm(request.POST)
-        if order_form.is_valid():
-            order_form.save()
+        # order_form = OrderForm(request.POST)
+        formset = order_form_set(request.POST, instance=current_customer)
+        if formset.is_valid():
+            formset.save()
             return redirect('/')
 
     cx = {
-        'key_order_form': order_form
+        'key_order_form': formset
     }
 
     return render(request, 'accounts/create_order.html', cx)
