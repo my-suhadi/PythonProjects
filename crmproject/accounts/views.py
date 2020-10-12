@@ -19,10 +19,14 @@ def register_user(request):
     if request.method == 'POST':
         reg_form = CreateUserForm(request.POST)
         if reg_form.is_valid():
-            user = reg_form.save()
-
             group = Group.objects.get(name='customer')
-            user.groups.add(group)
+
+            user_reg = reg_form.save()
+            user_reg.groups.add(group)
+
+            Customer.objects.create(user=user_reg,
+                                    name=reg_form.cleaned_data['username'],
+                                    email=reg_form.cleaned_data['email'])
 
             messages.success(request, 'Account was created for ' + reg_form.cleaned_data.get('username'))
             return redirect('url_login')
@@ -58,8 +62,22 @@ def logout_user(request):
     return redirect('url_login')
 
 
+@login_required(login_url='url_login')
+@allowed_user(allowed_group=['customer'])
 def user_page(request):
-    return render(request, 'accounts/user.html', {})
+    order_by_customer = request.user.customer.order_set.all()
+
+    total_order = order_by_customer.count()
+    delivered = order_by_customer.filter(status='delivered').count()
+    pending = order_by_customer.filter(status='pending').count()
+
+    cx = {
+        'key_order_by_customer': order_by_customer,
+        'key_total_order': total_order,
+        'key_delivered': delivered,
+        'key_pending': pending,
+    }
+    return render(request, 'accounts/user.html', cx)
 
 
 @login_required(login_url='url_login')

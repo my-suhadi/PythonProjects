@@ -10,7 +10,7 @@ from .models import Customer, Product, Order, Tag
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'email')
 
 
 @admin.register(Product)

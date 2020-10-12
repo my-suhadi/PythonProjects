@@ -3,4 +3,29 @@
 {% block content_main %}
     {% include 'accounts/status.html' %}
     <h1>User</h1>
+
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <table class="table table-sm">
+                    <tr>
+                        <th>Product</th>
+                        <th>Note</th>
+                        <th>Date Order</th>
+                        <th>Status</th>
+                    </tr>
+                    {% for customer_order in key_order_by_customer %}
+                        <tr>
+                            <td>{{ customer_order.product.name }}</td>
+                            <td>{{ customer_order.note }}</td>
+                            <td>{{ customer_order.date_created }}</td>
+                            <td>{{ customer_order.status }}</td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
