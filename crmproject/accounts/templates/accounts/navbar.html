@@ -17,12 +17,14 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        {% if request.user.is_staff %}
-            <div class="navbar-nav">
+        <div class="navbar-nav">
+            {% if request.user.is_staff %}
                 <a class="nav-item nav-link active" href="{% url 'url_home' %}">Dashboard</a>
                 <a class="nav-item nav-link" href="{% url 'url_product' %}">Products</a>
-            </div>
-        {% endif %}
+            {% else %}
+                <a class="nav-item nav-link" href="{% url 'url_account' %}">Account</a>
+            {% endif %}
+        </div>
     </div>
     <span class="hello-msg">Hello, {{ request.user }}</span>
     <span class="hello-msg"><a href="{% url 'url_logout' %}">Logout</a></span>

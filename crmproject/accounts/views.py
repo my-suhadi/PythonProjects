@@ -8,7 +8,7 @@ from django.forms import inlineformset_factory
 # Create your views here.
 from .decorators import unauthenticated_user, allowed_user, admin_only
 from .models import Product, Order, Customer
-from .form import OrderForm, CreateUserForm
+from .form import OrderForm, CreateUserForm, CustomerForm
 from .filters import OrderFilter
 
 
@@ -99,6 +99,23 @@ def home(request):
         'key_pending': pending,
     }
     return render(request, 'accounts/dashboard.html', cx)
+
+
+@login_required(login_url='url_login')
+@allowed_user(allowed_group=['customer'])
+def account_settings(req):
+    request_customer = req.user.customer
+    form = CustomerForm(instance=request_customer)
+
+    if req.method == 'POST':
+        form = CustomerForm(req.POST, req.FILES, instance=request_customer)
+        if form.is_valid():
+            form.save()
+
+    cx = {
+        'key_form': form
+    }
+    return render(req, 'accounts/account_settings.html', cx)
 
 
 @login_required(login_url='url_login')
