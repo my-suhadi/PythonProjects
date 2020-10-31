@@ -22,7 +22,7 @@ from ecommerce import settings
 # https://www.youtube.com/playlist?list=PL-51WBLyFTg0omnamUjL1TCVov7yDTRng
 
 urlpatterns = [
-    path('', include('store.urls'), name='home_url'),
+    path('', include('store.urls'), name='homeUrl'),
     path('admin/', admin.site.urls),
 ]
 

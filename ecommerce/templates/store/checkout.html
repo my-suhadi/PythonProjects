@@ -42,12 +42,12 @@
 
         <div class="col-lg-6">
             <div class="box-element">
-                <a class="btn btn-outline-dark" href="{% url 'cart_url' %}">&#x2190; Back to Cart</a>
+                <a class="btn btn-outline-dark" href="{% url 'cartUrl' %}">&#x2190; Back to Cart</a>
                 <hr>
                 <h3>Order Summary</h3>
                 <hr>
 
-                {% for item in key_items %}
+                {% for item in itemsKey %}
                     <div class="cart-row">
                         <div style="flex:2"><img class="row-image" src="{{ item.product.image_url }}"></div>
                         <div style="flex:2">
@@ -62,8 +62,8 @@
                     </div>
                 {% endfor %}
 
-                <h5>Items: {{ key_order.get_cart_items }}</h5>
-                <h5>Total: ${{ key_order.get_cart_total|floatformat:2 }}</h5>
+                <h5>Items: {{ orderKey.get_cart_items }}</h5>
+                <h5>Total: ${{ orderKey.get_cart_total|floatformat:2 }}</h5>
             </div>
         </div>
     </div>
