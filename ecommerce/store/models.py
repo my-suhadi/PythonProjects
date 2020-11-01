@@ -3,6 +3,8 @@ from django.db import models
 
 
 # Create your models here.
+# uuid sebagai id
+# https://dev.to/serhatteker/how-to-use-uuid-as-a-primary-id-in-django-models-4bhc
 
 
 class Customer(models.Model):
@@ -52,6 +54,16 @@ class Order(models.Model):
         order_items = self.orderitem_set.all()
         total = sum(item.quantity for item in order_items)
         return total
+
+    @property
+    def shipping(self):
+        shipping_ = False
+        order_items = self.orderitem_set.all()
+        for i in order_items:
+            if not i.product.digital:
+                shipping_ = True
+
+        return shipping_
 
 
 class OrderItem(models.Model):

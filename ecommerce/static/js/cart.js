@@ -19,7 +19,7 @@ for (let i = 0; i < updateBtn.length; i++) {
 function updateUserOrder(productId, action) {
     console.log('user send a data');
 
-    const url = 'update-item/';
+    const url = '/update-item/';    // depan harus dikasih slice
     fetch(url, {
         method: 'POST',
         headers: {

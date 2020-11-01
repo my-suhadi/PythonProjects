@@ -16,7 +16,8 @@ def store(request):
     else:
         order = {
             'get_cart_items': 0,
-            'get_cart_total': 0
+            'get_cart_total': 0,
+            'shipping': False
         }
         cart_items = order['get_cart_items']
 
@@ -35,6 +36,31 @@ def cart(request):
 
 def checkout(request):
     return render(request, 'store/checkout.html', get_customer_data(request))
+
+
+def get_customer_data(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cart_items = order.get_cart_items
+
+    else:
+        items = []
+        order = {
+            'get_cart_items': 0,
+            'get_cart_total': 0,
+            'shipping': False
+        }
+        cart_items = order['get_cart_items']
+
+    cx = {
+        'itemsKey': items,
+        'orderKey': order,
+        'cartItemsKey': cart_items
+    }
+
+    return cx
 
 
 def update_item(request):
@@ -63,27 +89,3 @@ def update_item(request):
         order_item.delete()
 
     return JsonResponse("item was added", safe=False)
-
-
-def get_customer_data(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cart_items = order.get_cart_items
-
-    else:
-        items = []
-        order = {
-            'get_cart_items': 0,
-            'get_cart_total': 0
-        }
-        cart_items = order['get_cart_items']
-
-    cx = {
-        'itemsKey': items,
-        'orderKey': order,
-        'cartItemsKey': cart_items
-    }
-
-    return cx

@@ -67,4 +67,20 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        const shipping = '{{ orderKey.shipping }}';
+
+        if (shipping === 'False') {
+            document.getElementById('shipping-info').innerHTML = '';
+        }
+
+        const form = document.getElementById('form');
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            console.log('form submitted...');
+            document.getElementById('form-button').classList.add('hidden');
+            document.getElementById('payment-info').classList.remove('hidden');
+        })
+    </script>
 {% endblock %}
