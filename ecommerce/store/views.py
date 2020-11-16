@@ -5,6 +5,8 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
+from django.views.decorators.csrf import csrf_exempt
+
 from store.models import Product, Order, OrderItem, ShippingAddress
 
 
@@ -92,6 +94,7 @@ def update_item(request):
     return JsonResponse('item was added', safe=False)
 
 
+@csrf_exempt
 def process_order(request):
     print('Data: ', request.body)
     transaction_id = datetime.datetime.now().timestamp()
