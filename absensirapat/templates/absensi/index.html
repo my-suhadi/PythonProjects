@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block blokTitle %}
-    {{ judul }}
+    {{ titleKey }}
 {% endblock blokTitle %}
 
 {% block blokHeader %}
-    {{ judul }}
+    {{ titleKey }}
 {% endblock blokHeader %}
 
 {% block blokIsi %}
@@ -13,21 +13,27 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col">NO.</th>
-            <th scope="col">JUDUL</th>
             <th scope="col">TANGGAL</th>
+            <th scope="col">MEETING ID</th>
+            <th scope="col">PASSWORD</th>
+            <th scope="col">PIMPINAN RAPAT</th>
+            <th scope="col">AGENDA</th>
             <th scope="col">AKSI</th>
         </tr>
         </thead>
         <tbody>
-        {% for agenda in allAgendaKey %}
+        {% for rapat in allRapatKey %}
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ agenda.judul }}</td>
-                <td>{{ agenda.tanggal }}</td>
+                <td>{{ rapat.tanggal }}</td>
+                <td>{{ rapat.meeting_id }}</td>
+                <td>{{ rapat.password }}</td>
+                <td>{{ rapat.pimpinan_rapat }}</td>
+                <td>{{ rapat.agenda }}</td>
                 <td><a class="btn btn-danger" href="#">Hapus</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    <a class="btn btn-primary" href="#">Tambah</a>
+    <a class="btn btn-primary" href="{% url 'tambahRapatUrl' %}">Tambah</a>
 {% endblock blokIsi %}
