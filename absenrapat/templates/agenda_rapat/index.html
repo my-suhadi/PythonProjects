@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block blokTitle %}
+    {{ judul }}
+{% endblock blokTitle %}
+
+{% block blokHeader %}
+    {{ judul }}
+{% endblock blokHeader %}
+
+{% block blokIsi %}
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">NO.</th>
+            <th scope="col">JUDUL</th>
+            <th scope="col">TANGGAL</th>
+            <th scope="col">AKSI</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for agenda in allAgendaKey %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ agenda.judul }}</td>
+                <td>{{ agenda.tanggal }}</td>
+                <td><a class="btn btn-danger" href="#">Hapus</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="#">Tambah</a>
+{% endblock blokIsi %}
