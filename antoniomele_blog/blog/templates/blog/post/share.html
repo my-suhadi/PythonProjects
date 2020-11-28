@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+    Share a post
+{% endblock %}
+
+{% block content %}
+    {% if sentKey %}
+        <h1>Email berhasil dikirim</h1>
+        <p>
+            "{{ postKey.title }}" sukses dikirim kepada {{ formKey.cleaned_data.email_kepada }}.
+        </p>
+    {% else %}
+        <h1>Share "{{ postKey.title }}" by email...</h1>
+        <form method="post">
+            {% for field in formKey %}
+                <div>
+                    {{ field.error }}
+                    {{ field.label_tag }} {{ field }}
+                </div>
+            {% endfor %}
+            {% csrf_token %}
+            <input type="submit" value="Send email"/>
+        </form>
+    {% endif %}
+{% endblock %}

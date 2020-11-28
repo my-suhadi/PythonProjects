@@ -1,13 +1,36 @@
 {% extends "blog/base.html" %}
 
 {% block title %}
-    {{ key_post.title }}
+    {{ postKey.title }}
 {% endblock %}
 
 {% block content %}
-    <h1>{{ key_post.title }}</h1>
+    <h1>{{ postKey.title }}</h1>
     <p class="date">
-        Published {{ key_post.publish }} by {{ key_post.author }}
+        Published {{ postKey.publish }} by {{ postKey.author }}
     </p>
-    {{ key_post.body|linebreaks }}
+    {{ postKey.body|linebreaks }}
+    
+    <p>
+        <a href="{% url 'blog:postShareUrl' postKey.id %}">Share this Post</a>
+    </p>
+    
+    {% with allCommentsKey.count as total_comment %}
+        <h2>
+            {{ total_comment }} comment{{ total_comment|pluralize }}
+        </h2>
+    {% endwith %}
+
+    {% for comment in allCommentsKey %}
+        <div class="comment">
+            <p class="info">
+                Comment {{ forloop.counter }} by {{ comment.nama }}
+                {{ comment.created }}
+            </p>
+            {{ comment.isi|linebreaks }}
+        </div>
+        {% empty %}
+        <p>Tidak ada komentar</p>
+    {% endfor %}
+
 {% endblock %}
