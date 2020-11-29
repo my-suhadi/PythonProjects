@@ -9,5 +9,15 @@
 {% endblock %}
 
 {% block blokIsi %}
-    <h1>BLOK ISI AGENDA</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in rapatFormKey %}
+            <div>
+                {{ field.error }}
+                {{ field.label_tag }} {{ field }}
+            </div>
+        {% endfor %}
+        <a class="btn btn-warning" href="{% url 'indexUrl' %}">Batal</a>
+        <input class="btn btn-primary" type="submit" value="Simpan"/>
+    </form>
 {% endblock %}

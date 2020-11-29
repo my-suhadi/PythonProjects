@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Rapat(models.Model):
-    tanggal = models.DateTimeField()
+    tanggal = models.DateTimeField(auto_now_add=True)
     meeting_id = models.CharField(max_length=15)
     password = models.CharField(max_length=15)
     pimpinan_rapat = models.CharField(max_length=50)
