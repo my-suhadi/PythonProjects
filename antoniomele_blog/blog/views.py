@@ -1,12 +1,40 @@
 from django.core.mail import send_mail
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 
 from .forms import EmailPostForm, CommentForm
-from .models import Post, Comment
+from .models import Post
+from taggit.models import Tag
 
 
 # Create your views here.
+
+def post_list(request, tag_slug=None):
+    post_obj = Post.published.all()
+    tag = None
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        post_obj = post_obj.filter(tags__in=[tag])
+
+    # nampilin 3 post perhalaman
+    paginator = Paginator(post_obj, 3)
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
+    cx = {
+        'pageKey': page,
+        'postsKey': posts,
+        'tagKey': tag,
+    }
+    return render(request, 'blog/post/list.html', cx)
+
 
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(
@@ -33,11 +61,19 @@ def post_detail(request, year, month, day, post):
     else:
         comment_form = CommentForm()
 
+    # dapatkan semua id tag pd sebuah post
+    post_all_tags_ids = post.tags.values_list('id', flat=True)
+
+    # dapatkan smua post yg memiliki id tag yg sama
+    similar_posts = Post.published.filter(tags__in=post_all_tags_ids).exclude(id=post.id)
+    similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags', '-publish')[:4]
+
     cx = {
         'postKey': post,
         'allCommentsKey': all_comments,
         'newCommentKey': new_comment,
-        'commentFormKey': comment_form
+        'commentFormKey': comment_form,
+        'similarPostsKey': similar_posts,
     }
 
     return render(request, 'blog/post/detail.html', cx)
@@ -70,8 +106,8 @@ def post_share(request, post_id):
     return render(request, 'blog/post/share.html', cx)
 
 
-class PostListView(ListView):
-    queryset = Post.objects.filter(status='published')
-    context_object_name = 'posts_obj'
-    paginate_by = 3
-    template_name = 'blog/post/list.html'
+# class PostListView(ListView):
+#     queryset = Post.published.all()
+#     context_object_name = 'posts_obj'
+#     paginate_by = 3
+#     template_name = 'blog/post/list.html'

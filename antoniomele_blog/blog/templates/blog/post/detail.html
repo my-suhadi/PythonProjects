@@ -15,6 +15,16 @@
         <a href="{% url 'blog:postShareUrl' postKey.id %}">Share this Post</a>
     </p>
 
+    <h2>Post yang serupa</h2>
+    {% for post in similarPostsKey %}
+        <p>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        </p>
+        {% empty %}
+            Belum ada post yang serupa
+    {% endfor %}
+
+
     {% with allCommentsKey.count as total_comment %}
         <h2>
             {{ total_comment }} comment{{ total_comment|pluralize }}
