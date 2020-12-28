@@ -1,6 +1,6 @@
 from django import forms
 
-from absensi.models import Rapat
+from .models import Rapat
 
 
 class RapatForm(forms.ModelForm):

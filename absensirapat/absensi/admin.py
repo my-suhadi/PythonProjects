@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from absensi.models import Rapat
+from .models import Rapat
 
 
 @admin.register(Rapat)

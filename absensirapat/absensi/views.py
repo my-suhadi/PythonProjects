@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from absensi import forms
-from absensi.models import Rapat
+from . import forms
+from .models import Rapat
 
 
 def index(request):

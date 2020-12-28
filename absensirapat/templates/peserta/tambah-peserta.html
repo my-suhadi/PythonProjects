@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block blokTitle %}
+    {{ titleKey }}
+{% endblock %}
+
+{% block blokHeader %}
+    {{ titleKey }}
+{% endblock %}
+
+{% block blokIsi %}
+    <form method="post">
+        {% csrf_token %}
+        {% for field in pesertaFormKey %}
+            <div>
+                {{ field.error }}
+                {{ field.label_tag }} {{ field }}
+            </div>
+        {% endfor %}
+        <a class="btn btn-warning" href="{% url 'indexUrl' %}">Batal</a>
+        <input class="btn btn-primary" type="submit" value="Simpan"/>
+    </form>
+{% endblock %}

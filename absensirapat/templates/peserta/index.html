@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Form Absensi Peserta Rapat</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block blokTitle %}
+    {{ titleKey }}
+{% endblock blokTitle %}
+
+{% block blokHeader %}
+    {{ titleKey }}
+{% endblock blokHeader %}
+
+{% block blokIsi %}
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">NO.</th>
+            <th scope="col">NAMA</th>
+            <th scope="col">NIP</th>
+            <th scope="col">JABATAN</th>
+            <th scope="col">UNIT KERJA</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for peserta in allPesertaKey %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ peserta.nama }}</td>
+                <td>{{ peserta.nip }}</td>
+                <td>{{ peserta.jabatan }}</td>
+                <td>{{ peserta.unit_kerja }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-danger" href="{% url 'indexUrl' %}">Kembali</a>
+    <a class="btn btn-primary" href="{% url 'tambahRapatUrl' %}">Tambah</a>
+{% endblock blokIsi %}

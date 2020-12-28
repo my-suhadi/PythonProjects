@@ -16,7 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from peserta import views
+
 urlpatterns = [
+    path('peserta/', include('peserta.urls'), name='pesertaUrl'),
+    path('<str:rapat_id>/', views.tambah_peserta, name='formPesertaUrl'),
     path('admin/', admin.site.urls),
     path('', include('absensi.urls'), name='absensiUrls'),
 ]
