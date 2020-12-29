@@ -1,3 +1,6 @@
+import random
+import string
+
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -15,11 +18,19 @@ def index(request):
     return render(request, 'absensi/index.html', cx)
 
 
+def generate_kode():
+    letters = string.ascii_letters
+    kode = ''.join(random.choice(letters) for i in range(5))
+    return kode
+
+
 def tambah_rapat(request):
     if request.method == 'POST':
         rapat_form = forms.RapatForm(data=request.POST)
         if rapat_form.is_valid():
-            rapat_form.save()
+            rapat = rapat_form.save(commit=False)
+            rapat.kode = generate_kode()
+            rapat.save()
             return redirect('indexUrl')
     else:
         rapat_form = forms.RapatForm()

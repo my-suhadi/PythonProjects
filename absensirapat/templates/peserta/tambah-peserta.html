@@ -11,13 +11,20 @@
 {% block blokIsi %}
     <form method="post">
         {% csrf_token %}
-        {% for field in pesertaFormKey %}
-            <div>
-                {{ field.error }}
-                {{ field.label_tag }} {{ field }}
-            </div>
-        {% endfor %}
-        <a class="btn btn-warning" href="{% url 'indexUrl' %}">Batal</a>
+        <table>
+            {% for field in pesertaFormKey %}
+                <tr>
+                    <td>
+                        {{ field.error }}
+                        {{ field.label_tag }}
+                    </td>
+                    <td>
+                        {{ field }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
         <input class="btn btn-primary" type="submit" value="Simpan"/>
     </form>
 {% endblock %}

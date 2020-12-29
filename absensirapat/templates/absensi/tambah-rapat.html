@@ -11,13 +11,29 @@
 {% block blokIsi %}
     <form method="post">
         {% csrf_token %}
-        {% for field in rapatFormKey %}
-            <div>
-                {{ field.error }}
-                {{ field.label_tag }} {{ field }}
-            </div>
-        {% endfor %}
+        <table>
+            {% for field in rapatFormKey %}
+                <tr>
+                    <td style="vertical-align: top">
+                        {{ field.error }}
+                        {{ field.label_tag }}
+                    </td>
+                    <td>
+                        {{ field }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
         <a class="btn btn-warning" href="{% url 'indexUrl' %}">Batal</a>
         <input class="btn btn-primary" type="submit" value="Simpan"/>
     </form>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#id_tanggal").datetimepicker({
+                format: 'd/m/Y H:i',
+            });
+        });
+    </script>
 {% endblock %}

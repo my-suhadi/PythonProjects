@@ -4,7 +4,12 @@ from .models import Peserta
 
 
 class PesertaForm(forms.ModelForm):
+
     class Meta:
         model = Peserta
         fields = '__all__'
-        # exclude = ('tanggal',)
+        exclude = ('rapat_id',)
+        labels = {
+            'nip': 'NIP',
+            'unit_kerja': 'Unit Kerja',
+        }

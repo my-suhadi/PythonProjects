@@ -22,7 +22,7 @@
         <tbody>
         {% for peserta in allPesertaKey %}
             <tr>
-                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ forloop.counter }}</td>
                 <td>{{ peserta.nama }}</td>
                 <td>{{ peserta.nip }}</td>
                 <td>{{ peserta.jabatan }}</td>
@@ -31,6 +31,8 @@
         {% endfor %}
         </tbody>
     </table>
-    <a class="btn btn-danger" href="{% url 'indexUrl' %}">Kembali</a>
-    <a class="btn btn-primary" href="{% url 'tambahRapatUrl' %}">Tambah</a>
+    <a class="btn btn-warning" href="{% url 'indexUrl' %}">Kembali</a>
+    {% if allPesertaKey.count != 0 %}
+        <a class="btn btn-primary" href="{% url 'peserta_app:exportPesertaUrl' rapatIdKey %}">Export to MS-Excel</a>
+    {% endif %}
 {% endblock blokIsi %}

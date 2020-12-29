@@ -20,7 +20,7 @@ from peserta import views
 
 urlpatterns = [
     path('peserta/', include('peserta.urls'), name='pesertaUrl'),
-    path('<str:rapat_id>/', views.tambah_peserta, name='formPesertaUrl'),
     path('admin/', admin.site.urls),
+    path('rapat/<str:kode>/', views.tambah_peserta, name='formPesertaUrl'),
     path('', include('absensi.urls'), name='absensiUrls'),
 ]
