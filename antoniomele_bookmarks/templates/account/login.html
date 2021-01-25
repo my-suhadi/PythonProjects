@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Log-in{% endblock %}
+
+{% block content %}
+    <h1>Log-in</h1>
+    <p>Silakan masukkan username dan password</p>
+    <form method="post">
+    {{ formKey.as_p }}
+    {% csrf_token %}
+    <p><input type="submit" value="Masuk"></p>
+    </form>
+{% endblock %}
