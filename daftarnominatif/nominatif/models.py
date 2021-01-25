@@ -20,9 +20,9 @@ class Jabatan(models.Model):
 
 class Pegawai(models.Model):
     nip = models.CharField(max_length=20)
-    nama = models.CharField(max_length=20)
-    golongan = models.ForeignKey(Golongan, on_delete=models.DO_NOTHING)
-    jabatan = models.ForeignKey(Jabatan, on_delete=models.DO_NOTHING)
+    nama = models.CharField(max_length=50)
+    golongan = models.ForeignKey(Golongan, models.DO_NOTHING, 'golongan_pegawai')
+    jabatan = models.ForeignKey(Jabatan, models.DO_NOTHING, 'jabatan_pegawai')
 
     def __str__(self):
         return self.nama
