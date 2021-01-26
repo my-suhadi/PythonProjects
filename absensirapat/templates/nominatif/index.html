@@ -16,12 +16,36 @@
             <th scope="col">NAMA</th>
             <th scope="col">NIP</th>
             <th scope="col">GOLONGAN</th>
+            <th scope="col">PANGKAT</th>
             <th scope="col">JABATAN</th>
             <th scope="col">BAGIAN</th>
         </tr>
         </thead>
         <tbody>
-
+        {% for pegawai in pageKey %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ pegawai.nama }}</td>
+                <td>{{ pegawai.nip }}</td>
+                <td>{{ pegawai.golongan }}</td>
+                <td>{{ pegawai.golongan.pangkat }}</td>
+                <td>{{ pegawai.jabatan }}</td>
+                <td>{{ pegawai.bagian }}</td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
+    <div class="pagination">
+            <span class="step-links">
+                {% if pageKey.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ pageKey.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="current">Page {{ pageKey.number }} of {{ pageKey.paginator.num_pages }}.</span>
+                {% if pageKey.has_next %}
+                    <a href="?page={{ pageKey.next_page_number }}">next</a>
+                    <a href="?page={{ pageKey.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+    </div>
 {% endblock blokIsi %}

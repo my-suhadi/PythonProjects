@@ -17,10 +17,11 @@ def import_sheet(request):
         def cust_func(row):
             q = Golongan.objects.filter(gol=row[2])[0]
             row[2] = q
+            print(row)
             return row
 
         if form.is_valid():
-            # Jabatan.objects.all().delete()
+            Pegawai.objects.all().delete()
             request.FILES['file'].save_to_database(
                 Pegawai,
                 cust_func,

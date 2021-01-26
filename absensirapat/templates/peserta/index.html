@@ -33,6 +33,6 @@
     </table>
     <a class="btn btn-warning" href="{% url 'indexUrl' %}">Kembali</a>
     {% if allPesertaKey.count != 0 %}
-        <a class="btn btn-primary" href="{% url 'peserta_app:exportPesertaUrl' rapatIdKey %}">Export to MS-Excel</a>
+        <a class="btn btn-primary" href="{% url 'pesertaApp:exportPesertaUrl' rapatIdKey %}">Export to MS-Excel</a>
     {% endif %}
 {% endblock blokIsi %}
