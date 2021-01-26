@@ -19,8 +19,9 @@ from django.urls import path, include
 from peserta import views
 
 urlpatterns = [
-    path('peserta/', include('peserta.urls'), name='pesertaUrl'),
+    path('peserta/', include('peserta.urls')),
     path('admin/', admin.site.urls),
     path('rapat/<str:kode>/', views.tambah_peserta, name='formPesertaUrl'),
-    path('', include('absensi.urls'), name='absensiUrls'),
+    path('nominatif/', include('nominatif.urls')),
+    path('', include('absensi.urls')),
 ]
