@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -27,4 +28,12 @@ def user_login(req):
     cx = {
         'formKey': form
     }
-    return render(req, 'account/login.html', cx)
+    template_name = 'account/login.html'
+    return render(req, template_name, cx)
+
+
+@login_required
+def dashboard(req):
+    cx = {'section': 'dashboard'}
+    template_name = 'account/dashboard.html'
+    return render(req, template_name, cx)

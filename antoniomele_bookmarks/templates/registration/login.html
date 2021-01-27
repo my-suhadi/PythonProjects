@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Log-in{% endblock %}
+
+{% block content %}
+    <h1>Log-in</h1>
+    {% if form.errors %}
+        <p>Username dan password yang Anda masukkan salah.
+            Silakan dicoba lagi.</p>
+    {% else %}
+        <p>Silakan menggunakan form dibawah ini untuk login</p>
+    {% endif %}
+
+    <div class="login-form">
+        <form action="{% url 'login' %}" method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+            <input type="submit" value="Log-in">
+        </form>
+        <p><a href="{% url 'passwordResetUrl' %}">Lupa password?</a></p>
+    </div>
+{% endblock %}
