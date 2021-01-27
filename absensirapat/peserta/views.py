@@ -1,10 +1,12 @@
 import xlsxwriter
-from django.http import HttpResponse
+from django.core import serializers
+from django.http import HttpResponse, JsonResponse
 
 from django.shortcuts import render, redirect
 from io import BytesIO
 
 # Create your views here.
+from nominatif.models import Pegawai
 from . import forms
 from .models import Peserta
 from absensi.models import Rapat
@@ -56,7 +58,7 @@ def export_peserta(request, rapat_id):
     row_num = 0
 
     for col_num, column_title in enumerate(columns, 0):
-        worksheet.write(row_num, col_num,column_title)
+        worksheet.write(row_num, col_num, column_title)
 
     for peserta in all_peserta:
         row_num += 1
@@ -77,3 +79,16 @@ def export_peserta(request, rapat_id):
     response.write(output.getvalue())
 
     return response
+
+
+def get_data_perserta(request):
+    nip_peserta = request.GET.get('nip')
+    data_peserta = Pegawai.objects.get(nip=nip_peserta)
+    response = {
+        'namaKey': data_peserta.nama,
+        'jabatanKey': data_peserta.jabatan.nama,
+        'bagianKey': data_peserta.bagian.nama,
+    }
+    print(JsonResponse(response))
+
+    return JsonResponse(response)

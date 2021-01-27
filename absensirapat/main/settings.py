@@ -30,6 +30,9 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+FILE_UPLOAD_HANDLERS = ('django_excel.ExcelMemoryFileUploadHandler',
+                        'django_excel.TemporaryExcelFileUploadHandler')
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'absensi.apps.AbsensiConfig',
     'peserta.apps.PesertaConfig',
+    'nominatif.apps.NominatifConfig',
 ]
 
 MIDDLEWARE = [

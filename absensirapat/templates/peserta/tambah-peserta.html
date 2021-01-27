@@ -27,4 +27,26 @@
 
         <input class="btn btn-primary" type="submit" value="Simpan"/>
     </form>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#id_nip').blur(function () {
+                $.ajax({
+                    data: $(this).serialize(),
+                    url: "{% url 'pesertaApp:getDataPesertaUrl'%}",
+                    success: function (response) {
+                        document.getElementById('id_nama').value = response.namaKey;
+                        document.getElementById('id_jabatan').value = response.jabatanKey;
+                        document.getElementById('id_unit_kerja').value = response.bagianKey;
+                    },
+                    error: function (response) {
+                        console.log(JSON.parse(response.responseText));
+                    }
+                });
+                return false;
+            });
+        })
+    </script>
 {% endblock %}

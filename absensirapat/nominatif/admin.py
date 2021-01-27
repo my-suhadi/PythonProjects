@@ -1,12 +1,12 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Golongan, Jabatan, Pegawai, Bagian
+from .models import Bagian, Golongan, Jabatan, Pegawai
 
 
 @admin.register(Bagian)
 class BagianAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('nama',)
 
 
 @admin.register(Golongan)
@@ -16,9 +16,9 @@ class GolonganAdmin(admin.ModelAdmin):
 
 @admin.register(Jabatan)
 class JabatanAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('nama',)
 
 
 @admin.register(Pegawai)
 class PegawaiAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('nama', 'nip', 'bagian',)
