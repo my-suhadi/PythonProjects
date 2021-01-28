@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Daftar{% endblock %}
+
+{% block content %}
+    <h1>Buat akun baru</h1>
+    <form method="post">
+    {{ userFormKey.as_p }}
+    {% csrf_token %}
+    <p><input type="submit" value="Daftar"></p>
+    </form>
+{% endblock %}
