@@ -4,7 +4,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
-from .forms import LoginForm, UserRegistrationForm
+from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
+from .models import Profile
 
 
 def user_login(req):
@@ -48,6 +49,9 @@ def daftar(req):
             user_baru.set_password(user_form.cleaned_data['passwd'])  # set_password() utk handle hashing
             user_baru.save()
 
+            # membuat profil user
+            Profile.objects.create(user=user_baru)
+
             nama_template = 'account/daftar_selesai.html'
             cx = {
                 'userBaruKey': user_baru
@@ -59,5 +63,24 @@ def daftar(req):
     nama_template = 'account/daftar.html'
     cx = {
         'userFormKey': user_form
+    }
+    return render(req, nama_template, cx)
+
+@login_required
+def ubah(req):
+    if req.method == 'POST':
+        user_form = UserEditForm(req.POST, instance=req.user)
+        profile_form = ProfileEditForm(req.POST, req.FILES, instance=req.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+    else:
+        user_form = UserEditForm(instance=req.user)
+        profile_form = ProfileEditForm(instance=req.user.profile)
+
+    nama_template = 'account/ubah.html'
+    cx = {
+        'userFormKey': user_form,
+        'profileFormKey': profile_form,
     }
     return render(req, nama_template, cx)

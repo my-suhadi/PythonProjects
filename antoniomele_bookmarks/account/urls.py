@@ -1,7 +1,9 @@
+from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView, \
     PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.urls import path
 
+from main import settings
 from . import views
 
 urlpatterns = [
@@ -23,4 +25,8 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='resetTokenUrl'),
     path('reset/done/', PasswordResetCompleteView.as_view(), name='resetDoneUrl'),
     path('daftar/', views.daftar, name='daftarUrl'),
+    path('ubah/', views.ubah, name='ubahUrl'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
