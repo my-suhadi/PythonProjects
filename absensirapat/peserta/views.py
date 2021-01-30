@@ -1,8 +1,8 @@
 import xlsxwriter
-from django.core import serializers
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from io import BytesIO
 
 # Create your views here.
@@ -12,6 +12,7 @@ from .models import Peserta
 from absensi.models import Rapat
 
 
+@login_required
 def index(request, rapat_id):
     all_peserta = Peserta.objects.all().filter(rapat_id=rapat_id)
     cx = {
@@ -42,6 +43,7 @@ def tambah_peserta(request, kode):
     return render(request, 'peserta/tambah-peserta.html', cx)
 
 
+@login_required
 def export_peserta(request, rapat_id):
     all_peserta = Peserta.objects.all().filter(rapat_id=rapat_id)
 
@@ -81,7 +83,8 @@ def export_peserta(request, rapat_id):
     return response
 
 
-def get_data_perserta(request):
+@login_required
+def get_data_peserta(request):
     nip_peserta = request.GET.get('nip')
     data_peserta = Pegawai.objects.get(nip=nip_peserta)
     response = {

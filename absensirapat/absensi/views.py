@@ -2,6 +2,7 @@ import random
 import string
 
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -11,7 +12,7 @@ from .models import Rapat
 
 @login_required
 def index(request):
-    all_rapat = Rapat.objects.all()
+    all_rapat = Rapat.objects.annotate(jml_peserta=Count('peserta_rapat'))
     cx = {
         'titleKey': 'Agenda Rapat',
         'allRapatKey': all_rapat
@@ -26,6 +27,7 @@ def generate_kode():
     return kode
 
 
+@login_required
 def tambah_rapat(request):
     if request.method == 'POST':
         rapat_form = forms.RapatForm(data=request.POST)
@@ -45,6 +47,7 @@ def tambah_rapat(request):
     return render(request, 'absensi/tambah-rapat.html', cx)
 
 
+@login_required
 def ubah_rapat(request, rapat_id):
     rapat_obj = Rapat.objects.get(id=rapat_id)
     rapat_form = forms.RapatForm(instance=rapat_obj)
@@ -62,6 +65,7 @@ def ubah_rapat(request, rapat_id):
     return render(request, 'absensi/tambah-rapat.html', cx)
 
 
+@login_required
 def hapus_rapat(request, rapat_id):
     Rapat.objects.filter(id=rapat_id).delete()
     return redirect('indexUrl')

@@ -1,16 +1,28 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tambah Peserta</title>
+    {% include "snippets/styles.html" %}
+    {% include "snippets/scripts.html" %}
+    <style type="text/css">
+        body {
+            background: #eee !important;
+        }
 
-{% block blokTitle %}
-    {{ titleKey }}
-{% endblock %}
-
-{% block containerHeader %}
-    {{ titleKey }}
-{% endblock %}
-
-{% block blokIsi %}
+        form {
+            max-width: 380px;
+            padding: 15px 35px 45px;
+            margin: 80px auto;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
     <form method="post">
         {% csrf_token %}
+        <h2>Tambah peserta rapat</h2>
+
         <table>
             {% for field in pesertaFormKey %}
                 <tr>
@@ -27,8 +39,6 @@
 
         <input class="btn btn-primary" type="submit" value="Simpan"/>
     </form>
-
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -49,4 +59,5 @@
             });
         })
     </script>
-{% endblock %}
+</body>
+</html>

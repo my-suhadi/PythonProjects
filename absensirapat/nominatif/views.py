@@ -1,8 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 
 # Create your views here.
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponseBadRequest
 from django.shortcuts import render
 
 # Create your views here.
@@ -10,6 +11,7 @@ from .forms import UploadFileForm
 from .models import Jabatan, Bagian, Golongan, Pegawai
 
 
+@login_required
 def index(request):
     all_pegawai = Pegawai.objects.all()
     paginator = Paginator(all_pegawai, 10)
@@ -23,6 +25,7 @@ def index(request):
     return render(request, 'nominatif/index.html', cx)
 
 
+@login_required
 def import_sheet(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)

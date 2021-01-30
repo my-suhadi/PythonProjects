@@ -33,8 +33,10 @@
                 <td>{{ rapat.pimpinan_rapat }}</td>
                 <td>{{ rapat.agenda }}</td>
                 <td>
-                    <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#hapusModalWith{{ rapat.id }}">Hapus</a>
-                    <a class="btn btn-warning" href="{% url 'ubahRapatUrl' rapat.id %}">Ubah</a>
+                    {% if rapat.jml_peserta == 0 %}
+                        <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#hapusModalWith{{ rapat.id }}">Hapus</a>
+                        <a class="btn btn-warning" href="{% url 'ubahRapatUrl' rapat.id %}">Ubah</a>
+                    {% endif %}
                     <a class="btn btn-primary" href="{% url 'pesertaApp:indexUrl' rapat.id %}">Lihat Absen</a>
 
                     <!-- Start of Modal -->
