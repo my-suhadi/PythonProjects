@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Dashboard</h1>
+    <p>Selamat datang.</p>
+    <p>Anda dapat <a href="{% url 'ubahUrl' %}">mengganti profil</a> atau <a href="{% url 'gantiPaswordUrl' %}">mengganti
+        password</a></p>
+{% endblock %}
