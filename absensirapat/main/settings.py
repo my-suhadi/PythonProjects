@@ -34,15 +34,15 @@ FILE_UPLOAD_HANDLERS = ('django_excel.ExcelMemoryFileUploadHandler',
                         'django_excel.TemporaryExcelFileUploadHandler')
 
 INSTALLED_APPS = [
+    'absensi.apps.AbsensiConfig',
+    'peserta.apps.PesertaConfig',
+    'nominatif.apps.NominatifConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'absensi.apps.AbsensiConfig',
-    'peserta.apps.PesertaConfig',
-    'nominatif.apps.NominatifConfig',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +124,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+LOGIN_REDIRECT_URL = 'indexUrl'
+LOGIN_URL = 'loginUrl'
+LOGOUT_REDIRECT_URL = 'loginUrl'

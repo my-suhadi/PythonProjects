@@ -1,6 +1,7 @@
 import random
 import string
 
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -8,6 +9,7 @@ from . import forms
 from .models import Rapat
 
 
+@login_required
 def index(request):
     all_rapat = Rapat.objects.all()
     cx = {

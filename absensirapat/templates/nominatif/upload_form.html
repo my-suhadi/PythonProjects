@@ -2,11 +2,11 @@
 
 {% block blokTitle %}
     {{ titleKey }}
-{% endblock blokTitle %}
+{% endblock %}
 
-{% block blokHeader %}
+{% block containerHeader %}
     {{ headerKey }}
-{% endblock blokHeader %}
+{% endblock %}
 
 {% block blokIsi %}
     {% if formKey.errors %}
@@ -22,4 +22,4 @@
         {% csrf_token %}
         <input type="submit" value="Submit">
     </form>
-{% endblock blokIsi %}
+{% endblock %}

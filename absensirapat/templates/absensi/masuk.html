@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block blokTitle %}
+    Absensi Rapat
+{% endblock %}
+
+{% block blokLogin %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% if form.errors %}
+        <!-- Start of Modal -->
+        <div class="modal fade" id="formError" tabindex="-1" role="dialog"
+             aria-labelledby="formErrorLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p>Username dan password tidak sesuai. Silakan coba lagi.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Modal -->
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#formError').modal();
+            });
+        </script>
+    {% endif %}
+
+    <div class="wrapper">
+        <form class="form-signin" action="{% url 'loginUrl' %}" method="post">
+            {% csrf_token %}
+            <h2 class="form-signin-heading">Silakan Login</h2>
+            <input type="text" class="form-control" name="username" placeholder="Username" required=""
+                   autofocus=""/>
+            <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
+            {% comment %}
+                <label class="checkbox">
+                    <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
+                </label>
+            {% endcomment %}
+            <input type="hidden" name="next" value="{{ next }}">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Masuk</button>
+        </form>
+    </div>
+{% endblock %}
