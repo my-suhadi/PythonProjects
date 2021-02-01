@@ -19,6 +19,7 @@ def index(request):
     page_obj = paginator.get_page(page_number)
 
     cx = {
+        'titleKey': 'Daftar Nominatif',
         'allPegawaiKey': all_pegawai,
         'pageKey': page_obj,
     }
@@ -49,6 +50,7 @@ def import_sheet(request):
 
         if form.is_valid():
             Pegawai.objects.all().delete()
+            # request.FILES['file'].save_to_database(Jabatan, None, ['nama'], name_columns_by_row=0)
             request.FILES['file'].save_to_database(
                 Pegawai,
                 pegawai_func,

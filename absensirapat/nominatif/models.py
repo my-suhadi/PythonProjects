@@ -18,7 +18,7 @@ class Golongan(models.Model):
 
 
 class Jabatan(models.Model):
-    nama = models.CharField(max_length=50)
+    nama = models.CharField(max_length=70)
 
     def __str__(self):
         return self.nama

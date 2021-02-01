@@ -1,0 +1,17 @@
+asgiref==3.3.1
+Django==3.1.4
+django-excel==0.0.10
+django-taggit==1.3.0
+et-xmlfile==1.0.1
+jdcal==1.4.1
+lml==0.1.0
+openpyxl==3.0.5
+Pillow==8.0.1
+pyexcel==0.6.6
+pyexcel-io==0.6.4
+pyexcel-webio==0.1.4
+pyexcel-xlsx==0.6.0
+pytz==2020.4
+sqlparse==0.4.1
+texttable==1.6.3
+XlsxWriter==1.3.7
