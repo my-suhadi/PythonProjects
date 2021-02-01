@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,7 +24,7 @@ SECRET_KEY = 'u!e!)$ps*5*y4noa4g+s$zj7crf+8=!mr2x3uc^)s^me(6sq0#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.64.2', '192.168.47.2', 'itjen.dephub.go.id']
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.64.2', '192.168.47.2', 'itjen.dephub.go.id']
 
 # Application definition
 
@@ -71,21 +71,29 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'absensirapat.wsgi.application'
+WSGI_APPLICATION = 'main.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dbdjango',
-        'USER': 'django',
-        'PASSWORD': 'admin_django',
-        'HOST': '10.60.61.81',
-        'PORT': '',
+if sys.platform == 'linux':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'dbabsensirapat',
+            'USER': 'absensirapat',
+            'PASSWORD': 'db_rapat',
+            'HOST': '10.60.61.81',
+            'PORT': '',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -121,13 +129,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# aktifkan sebelum melakukan perintah collecstatic
+# STATIC_ROOT = BASE_DIR / 'static'
+
 STATIC_URL = '/absensirapat/static/'
 
-STATIC_ROOT = BASE_DIR / 'static'
-
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'static',
-# ]
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
 LOGIN_REDIRECT_URL = 'indexUrl'
 LOGIN_URL = 'loginUrl'

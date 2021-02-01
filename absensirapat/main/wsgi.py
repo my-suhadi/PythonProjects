@@ -11,6 +11,11 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
+import monitor
+
+monitor.start(interval=1.0)
+monitor.track(os.path.join(os.path.dirname(__file__), 'site.cf'))
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'main.settings')
 
 application = get_wsgi_application()

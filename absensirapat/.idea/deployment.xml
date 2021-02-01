@@ -2,6 +2,13 @@
 <project version="4">
   <component name="PublishConfigData" autoUpload="Always" serverName="centos.dev">
     <serverData>
+      <paths name="Copy of project-level server 'centos.dev'">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/mnt/data/django/projects/absensirapat" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="centos.dev">
         <serverdata>
           <mappings>

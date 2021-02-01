@@ -83,7 +83,6 @@ def export_peserta(request, rapat_id):
     return response
 
 
-@login_required
 def get_data_peserta(request):
     nip_peserta = request.GET.get('nip')
     data_peserta = Pegawai.objects.get(nip=nip_peserta)
