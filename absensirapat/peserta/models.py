@@ -10,3 +10,4 @@ class Peserta(models.Model):
     nama = models.CharField(max_length=50)
     jabatan = models.CharField(max_length=50)
     unit_kerja = models.CharField(max_length=255)
+    no_hp = models.CharField(max_length=13)

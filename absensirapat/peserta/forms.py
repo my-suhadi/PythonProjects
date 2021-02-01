@@ -12,4 +12,5 @@ class PesertaForm(forms.ModelForm):
         labels = {
             'nip': 'NIP',
             'unit_kerja': 'Unit Kerja',
+            'no_hp': 'No. HP',
         }
