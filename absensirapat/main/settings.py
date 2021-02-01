@@ -132,7 +132,7 @@ USE_TZ = True
 # aktifkan sebelum melakukan perintah collecstatic
 # STATIC_ROOT = BASE_DIR / 'static'
 
-STATIC_URL = '/absensirapat/static/'
+STATIC_URL = '/absensi/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
